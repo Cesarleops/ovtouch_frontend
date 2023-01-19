@@ -1,0 +1,49 @@
+@import '../../../../variables.scss';
+.loginModal{
+    background-color: $primary-color;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 80vh;
+    bottom: 0;
+    left: 0;
+    border-radius: 36px 36px 0 0 ;
+    &--container{
+        &__header{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 60px;
+        }
+        &__form{
+            width: 250px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            
+            &__inputUsername{
+                border: none;
+            }
+            &__inputPassword{
+                border: none;
+            }
+            &__buttonLogin{
+                border: none;
+                border-radius: 5px ;
+                width: 180px;
+                height: 35px;
+                background-color: $secondary-color;
+                font-weight: 600;
+                font-size: 15px;
+                color: $text-color-light;
+            }
+        }
+
+    }
+   
+    
+
+}

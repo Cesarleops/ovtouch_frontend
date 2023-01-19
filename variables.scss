@@ -1,0 +1,26 @@
+
+
+//Colors 
+$primary-color: #009973 ;
+$secondary-color: #4DABEB;
+$text-color-light: #BBECD7;
+
+
+//Mixins
+
+@mixin primary-button {
+    border: none;
+    border-radius: 6px ;
+    width: 180px;
+    height: 35px;
+    background-color: $primary-color;
+    font-weight: 600;
+    font-size: 15px;
+    color: $text-color-light;
+
+   
+
+
+    
+
+}

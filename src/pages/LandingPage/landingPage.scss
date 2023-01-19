@@ -1,0 +1,47 @@
+@import '../../../variables.scss';
+
+
+.landingPage {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: $secondary-color;
+    font-family: Inter Tight, sans-serif;
+    &--header{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #009973;
+        h1 {
+            font-weight: 700;
+            font-size: 50px;
+            margin-bottom: 0px;
+        }
+        h3{
+            font-weight: 500;
+            font-size: 25px;
+        }
+    }
+    &--auth--email__button{
+        @include primary-button;
+        margin-bottom: 30PX;
+    }
+    &--footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 18px;
+        color: #009973;
+        &__button{
+            @include primary-button;
+        }
+    }
+    
+}
