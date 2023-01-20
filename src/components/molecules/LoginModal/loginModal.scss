@@ -13,8 +13,16 @@
     &--container{
         &__header{
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
+          align-items: center;
           margin-bottom: 60px;
+          gap: 80px;
+          color: $secondary-color;
+          &__button{
+            width: 30px;
+            height: 30px;
+          }
+          
         }
         &__form{
             width: 250px;
@@ -23,22 +31,38 @@
             flex-direction: column;
             gap: 10px;
             padding: 20px;
+
+            &__nameLabel{
+                color: $secondary-color;
+                font-size: 20px;
+            }
+            &__passwordLabel{
+                color: $secondary-color;
+                font-size: 20px;
+            }
             
             &__inputUsername{
                 border: none;
+                border-bottom: 4px solid $secondary-color;
+                height: 25px;
+                border-radius: 5px;
             }
             &__inputPassword{
                 border: none;
+                height: 25px;
+                border-bottom: 4px solid $secondary-color;
+                border-radius: 5px;
+                
             }
             &__buttonLogin{
                 border: none;
                 border-radius: 5px ;
-                width: 180px;
+                width: 250px;
                 height: 35px;
                 background-color: $secondary-color;
                 font-weight: 600;
                 font-size: 15px;
-                color: $text-color-light;
+                color: $primary-color;
             }
         }
 
