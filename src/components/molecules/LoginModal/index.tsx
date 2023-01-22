@@ -1,16 +1,18 @@
 import { useState } from "react";
 import "./loginModal.scss";
 import { BiArrowBack } from "react-icons/bi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../store/auth/thunks";
 
 export const LoginModal = ({ onClose }) => {
   //   const { onClose } = props;
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
   const [initialForm, setInitialForm] = useState({
     email: "",
     password: "",
   });
+
   const handleInputChange = ({ target }) => {
     setInitialForm({
       ...initialForm,
@@ -21,7 +23,6 @@ export const LoginModal = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(userLogin(initialForm));
-    console.log("usuario logeado");
   };
 
   return (

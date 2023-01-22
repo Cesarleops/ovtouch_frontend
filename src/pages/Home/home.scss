@@ -1,0 +1,22 @@
+.chatHeader{
+    padding: 0px 20px 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
+}
+
+.user{
+    display: flex;
+    gap: 100px;
+    &--list{
+        width: 360px;
+        height: 90vh;
+        background-color: red;
+    }
+    &--info{
+        padding: 20px 0px 20px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
