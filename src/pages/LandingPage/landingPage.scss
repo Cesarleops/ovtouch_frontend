@@ -16,7 +16,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: #009973;
+        color: $primary-color;
+        margin-bottom: 100px;
         h1 {
             font-weight: 700;
             font-size: 50px;
@@ -29,7 +30,7 @@
     }
     &--auth--email__button{
         @include primary-button;
-        margin-bottom: 30PX;
+        margin-bottom: 15px;
     }
     &--footer{
         display: flex;
@@ -38,7 +39,7 @@
         justify-content: center;
         gap: 10px;
         font-size: 18px;
-        color: #009973;
+        color: $primary-color;
         &__button{
             @include primary-button;
         }

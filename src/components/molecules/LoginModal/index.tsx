@@ -1,7 +1,28 @@
+import { useState } from "react";
 import "./loginModal.scss";
 import { BiArrowBack } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../../store/auth/thunks";
+
 export const LoginModal = ({ onClose }) => {
   //   const { onClose } = props;
+  const dispatch = useDispatch();
+  const [initialForm, setInitialForm] = useState({
+    email: "",
+    password: "",
+  });
+  const handleInputChange = ({ target }) => {
+    setInitialForm({
+      ...initialForm,
+      [target.name]: target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(userLogin(initialForm));
+    console.log("usuario logeado");
+  };
 
   return (
     <div className="loginModal">
@@ -13,7 +34,7 @@ export const LoginModal = ({ onClose }) => {
           />
           <h1 className="loginModal--container__header__title">Log In</h1>
         </header>
-        <form className="loginModal--container__form">
+        <form className="loginModal--container__form" onSubmit={handleSubmit}>
           <label
             className="loginModal--container__form__nameLabel"
             htmlFor="username"
@@ -21,9 +42,12 @@ export const LoginModal = ({ onClose }) => {
             Email
           </label>
           <input
+            onChange={handleInputChange}
             className="loginModal--container__form__inputUsername"
             type="text"
             id="email"
+            name="email"
+            value={initialForm.email}
           />
           <label
             className="loginModal--container__form__passwordLabel"
@@ -32,11 +56,17 @@ export const LoginModal = ({ onClose }) => {
             Password
           </label>
           <input
+            onChange={handleInputChange}
             className="loginModal--container__form__inputPassword"
             type="password"
             id="password"
+            name="password"
+            value={initialForm.password}
           />
-          <button className="loginModal--container__form__buttonLogin">
+          <button
+            type="submit"
+            className="loginModal--container__form__buttonLogin"
+          >
             Log In
           </button>
         </form>

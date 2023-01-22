@@ -33,7 +33,7 @@ export const LandingPage = () => {
           >
             Log in
           </button>
-          <p>Or</p>
+          <p>Or continue with</p>
           <GoogleSignIn />
         </div>
       </section>

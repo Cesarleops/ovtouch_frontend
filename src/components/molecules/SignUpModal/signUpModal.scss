@@ -32,7 +32,11 @@
             gap: 10px;
             padding: 20px;
 
-            &__nameLabel{
+            &__usernameLabel{
+                color: $secondary-color;
+                font-size: 20px;
+            }
+            &__emailLabel{
                 color: $secondary-color;
                 font-size: 20px;
             }
@@ -40,8 +44,13 @@
                 color: $secondary-color;
                 font-size: 20px;
             }
-            
             &__inputUsername{
+                border: none;
+                border-bottom: 4px solid $secondary-color;
+                height: 25px;
+                border-radius: 5px;
+            }
+            &__inputEmailname{
                 border: none;
                 border-bottom: 4px solid $secondary-color;
                 height: 25px;

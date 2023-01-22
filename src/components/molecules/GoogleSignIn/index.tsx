@@ -18,7 +18,7 @@ export const GoogleSignIn = () => {
   useEffect(() => {
     google.accounts.id.initialize({
       client_id:
-        "44633505999-4io0blitej210r6jognpv25ik8s3hu8h.apps.googleusercontent.com",
+        "44633505999-vuqnjti0h0d8jhqgooi3kb38ia1ltg2l.apps.googleusercontent.com",
       callback: handleCredentialResponse,
     });
     google.accounts.id.renderButton(
@@ -27,7 +27,6 @@ export const GoogleSignIn = () => {
         type: "icon",
         theme: "outline",
         size: "large",
-        text: "Continue with google",
       } // customization attributes
     );
   }, []);
