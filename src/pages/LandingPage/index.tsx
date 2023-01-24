@@ -5,7 +5,8 @@ import { SignUpModal } from "../../components/molecules/SignUpModal";
 import { LoginModal } from "../../components/molecules/LoginModal";
 import { LoginTitle } from "../../components/atoms/LoginTitle";
 import { SignUpTitle } from "../../components/atoms/SignUpTitle";
-export const LandingPage = () => {
+export const LandingPage = ({ socket }) => {
+  console.log(socket);
   const [isLoginActive, setIsLoginActive] = useState<boolean>(false);
   const [isSignUpActive, setIsSignUpActive] = useState<boolean>(false);
   return (
@@ -42,7 +43,9 @@ export const LandingPage = () => {
         <SignUpModal onClose={() => setIsSignUpActive(false)} />
       )}
 
-      {isLoginActive && <LoginModal onClose={() => setIsLoginActive(false)} />}
+      {isLoginActive && (
+        <LoginModal socket={socket} onClose={() => setIsLoginActive(false)} />
+      )}
     </main>
   );
 };

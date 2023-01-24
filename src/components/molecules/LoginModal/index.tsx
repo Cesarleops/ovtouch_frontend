@@ -4,10 +4,9 @@ import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../store/auth/thunks";
 
-export const LoginModal = ({ onClose }) => {
+export const LoginModal = ({ onClose, socket }) => {
   //   const { onClose } = props;
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
   const [initialForm, setInitialForm] = useState({
     email: "",
     password: "",
