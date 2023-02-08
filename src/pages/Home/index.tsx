@@ -1,15 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-
-import { onLogout, onVerification } from "../../store/auth/authSlice";
-import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import type { RootState } from "../../store/store";
+import {
+  checkingCredentials,
+  onLogout,
+  onVerification,
+} from "../../store/auth/authSlice";
+import { useEffect } from "react";
 import "./home.scss";
 import { UsersList } from "../../components/molecules/UsersList";
 import { MainChat } from "../../components/molecules/MainChat";
+import { Checking } from "../../components/atoms/Checking";
 
-export const Home = ({ socket }) => {
+const socket: Socket = io("http://localhost:3031");
+
+export const Home = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
+  const user = useSelector((state: RootState) => state.auth);
+  const { isChatting } = useSelector((state: RootState) => state.chat);
 
   const validateJWT = async () => {
     const token = localStorage.getItem("token");
@@ -18,29 +27,43 @@ export const Home = ({ socket }) => {
         "x-token": token,
       },
     });
+
     dispatch(onVerification(response.data.token));
   };
 
   const handleClick = () => {
     dispatch(onLogout());
     localStorage.removeItem("token");
+    socket.disconnect();
   };
 
   useEffect(() => {
+    socket.connect();
     socket.emit("loged-user", user);
-  }, []);
-  useEffect(() => {
+    localStorage.setItem("auth", user.status);
     localStorage.setItem("token", user.token);
     validateJWT();
-  }, [localStorage.getItem("token")]);
+  }, []);
+
   return (
-    <main>
+    <main className="mainBody">
       <header>
-        <h1>Sendy</h1>
         <button onClick={handleClick}>Sign Out</button>
       </header>
-      <UsersList socket={socket} />
-      <MainChat socket={socket} />
+      <main className="mainBody--chat">
+        <section className="mainBody--chat__list">
+          <UsersList socket={socket} />
+        </section>
+        <section className="mainBody--chat__section">
+          {isChatting ? (
+            <MainChat socket={socket} />
+          ) : (
+            <div>
+              <p>Start chatting</p>
+            </div>
+          )}
+        </section>
+      </main>
     </main>
   );
 };

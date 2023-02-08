@@ -4,8 +4,9 @@ import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../store/auth/thunks";
 
-export const LoginModal = ({ onClose, socket }) => {
+export const LoginModal = ({ onClose }) => {
   //   const { onClose } = props;
+
   const dispatch = useDispatch();
   const [initialForm, setInitialForm] = useState({
     email: "",

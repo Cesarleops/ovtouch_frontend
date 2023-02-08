@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export const authSlice = createSlice({
     name: 'authSlice',
@@ -41,14 +41,18 @@ export const authSlice = createSlice({
          },
          onVerification: (state, {payload}) => {
             state.token= payload
+            state.status = 'authenticated'
          },
 
          onLogout:(state)=> {
             state.status = 'not-authenticated'
+         },
+         checkingCredentials: (state) => {
+            state.status = 'checking'
          }
 
     }
 
 })
 
-export const {onLogin, onSignUp, onGoogleSignIn, onLogout, onVerification} = authSlice.actions
+export const {onLogin, onSignUp, onGoogleSignIn, onLogout, onVerification, checkingCredentials} = authSlice.actions

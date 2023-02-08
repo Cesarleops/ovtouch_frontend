@@ -1,11 +1,14 @@
 import { useState } from "react";
 
+interface Message {
+  message: string;
+}
 export const ChatFooter = ({ socket }) => {
-  const [message, setMessage] = useState("");
-  const handleInputChange = ({ target }) => {
-    setMessage(target.value);
+  const [message, setMessage] = useState<Message["message"]>("");
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     socket.emit("message", message);
     setMessage("");
