@@ -1,0 +1,18 @@
+
+.userList{
+    padding: 10px 0px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   
+}
+
+.userBox{
+    display: flex;
+    height: 50px;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+  
+}

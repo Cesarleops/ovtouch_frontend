@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react";
-import { ChatFooter } from "../ChatFooter";
 import { ChatBody } from "../ChatBody";
-import { useSelector } from "react-redux";
-
-interface Messages {
-  messages: Array<string>;
-}
-
+import "./mainChat.scss";
 export const MainChat = ({ socket }) => {
-  const [messages, setMessages] = useState<Messages["messages"]>([]);
-
-  useEffect(() => {
-    socket.on("recieve-message", (message) =>
-      setMessages([...messages, message])
-    );
-  }, [messages]);
   return (
-    <main>
-      <ChatBody messages={messages} />
-      <ChatFooter socket={socket} />
+    <main className="mainChat">
+      <ChatBody socket={socket} />
     </main>
   );
 };

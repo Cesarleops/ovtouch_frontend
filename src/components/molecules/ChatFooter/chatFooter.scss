@@ -1,0 +1,28 @@
+
+.messageForm{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.textInput{
+    width: 400px;
+    border-radius: 10px;
+    border: 1px solid green;
+}
+
+.iconSection{
+    background-color: green;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+}
+
+.sendMessage{
+    color: white;
+    width: 20px;
+    height: 20px;
+
+}

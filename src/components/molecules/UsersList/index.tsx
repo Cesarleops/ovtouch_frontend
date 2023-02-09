@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { startChat } from "../../../store/chat";
+import "./usersList.scss";
 
 export const UsersList = ({ socket }) => {
-  const [users, setUsers] = useState([]);
+  const { users } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
-
   const handleClick = (user) => {
     dispatch(startChat(user));
     socket.emit("start-chat", user.uid);
   };
-  useEffect(() => {
-    socket.on("active-users", (connectedUsers) => setUsers(connectedUsers));
-  }, [socket, users]);
+
   return (
-    <div>
+    <div className="userList">
       {users.map((u) => (
-        <div onClick={() => handleClick(u)}>{u.name}</div>
+        <div onClick={() => handleClick(u)} className="userBox" key={u.uid}>
+          <p className="userBox--name">{u.name}</p>
+        </div>
       ))}
     </div>
   );

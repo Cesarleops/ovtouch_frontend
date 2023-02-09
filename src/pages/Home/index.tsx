@@ -3,19 +3,18 @@ import axios from "axios";
 import { io, Socket } from "socket.io-client";
 import type { RootState } from "../../store/store";
 import { onLogout, onVerification } from "../../store/auth/authSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./home.scss";
 import { UsersList } from "../../components/molecules/UsersList";
 import { MainChat } from "../../components/molecules/MainChat";
+import { showUsers } from "../../store/chat";
 
 const socket: Socket = io("http://localhost:3031");
 
 export const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
-  const { isChatting } = useSelector((state: RootState) => state.chat);
-  const [currentChat, setCurrentChat] = useState(undefined);
-
+  const { isChatting, users } = useSelector((state: RootState) => state.chat);
   const validateJWT = async () => {
     const token = localStorage.getItem("token");
     const response = await axios.get("http://localhost:3031/api/auth", {
@@ -27,6 +26,14 @@ export const Home = () => {
     dispatch(onVerification(response.data.token));
   };
 
+  const connectedUsers = async () => {
+    const { data } = await axios.get(
+      `http://localhost:3031/api/users/${user.uid}`
+    );
+
+    dispatch(showUsers(data));
+  };
+
   const handleClick = () => {
     dispatch(onLogout());
     localStorage.removeItem("token");
@@ -35,10 +42,11 @@ export const Home = () => {
 
   useEffect(() => {
     socket.connect();
-    socket.emit("loged-user", user);
+    socket.emit("loged-users", users);
     localStorage.setItem("token", user.token);
     validateJWT();
-  }, []);
+    connectedUsers();
+  }, [user]);
 
   return (
     <main className="mainBody">
@@ -51,7 +59,7 @@ export const Home = () => {
         </section>
         <section className="mainBody--chat__section">
           {isChatting ? (
-            <MainChat currentChat={currentChat} socket={socket} />
+            <MainChat socket={socket} />
           ) : (
             <div>
               <p>Start chatting</p>
