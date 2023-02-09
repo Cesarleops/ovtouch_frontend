@@ -3,14 +3,12 @@ import { useDispatch } from "react-redux";
 import { startChat } from "../../../store/chat";
 
 export const UsersList = ({ socket }) => {
-  console.log(socket);
   const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
-  users.map((u) => console.log(u));
-  const handleClick = ({ uid }) => {
-    console.log(uid);
-    dispatch(startChat());
-    socket.emit("start-chat", uid);
+
+  const handleClick = (user) => {
+    dispatch(startChat(user));
+    socket.emit("start-chat", user.uid);
   };
   useEffect(() => {
     socket.on("active-users", (connectedUsers) => setUsers(connectedUsers));

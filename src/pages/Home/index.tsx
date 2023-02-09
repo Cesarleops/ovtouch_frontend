@@ -2,16 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { io, Socket } from "socket.io-client";
 import type { RootState } from "../../store/store";
-import {
-  checkingCredentials,
-  onLogout,
-  onVerification,
-} from "../../store/auth/authSlice";
-import { useEffect } from "react";
+import { onLogout, onVerification } from "../../store/auth/authSlice";
+import { useEffect, useState } from "react";
 import "./home.scss";
 import { UsersList } from "../../components/molecules/UsersList";
 import { MainChat } from "../../components/molecules/MainChat";
-import { Checking } from "../../components/atoms/Checking";
 
 const socket: Socket = io("http://localhost:3031");
 
@@ -19,6 +14,7 @@ export const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
   const { isChatting } = useSelector((state: RootState) => state.chat);
+  const [currentChat, setCurrentChat] = useState(undefined);
 
   const validateJWT = async () => {
     const token = localStorage.getItem("token");
@@ -40,7 +36,6 @@ export const Home = () => {
   useEffect(() => {
     socket.connect();
     socket.emit("loged-user", user);
-    localStorage.setItem("auth", user.status);
     localStorage.setItem("token", user.token);
     validateJWT();
   }, []);
@@ -56,7 +51,7 @@ export const Home = () => {
         </section>
         <section className="mainBody--chat__section">
           {isChatting ? (
-            <MainChat socket={socket} />
+            <MainChat currentChat={currentChat} socket={socket} />
           ) : (
             <div>
               <p>Start chatting</p>

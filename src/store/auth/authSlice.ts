@@ -16,6 +16,7 @@ export const authSlice = createSlice({
             state.name = payload.user.name
             state.status = 'authenticated',
             state.uid = payload.user.uid,
+            localStorage.setItem('user', state.status)
             // state.email = payload.email
             // state.img = payload.img
             state.google = false,

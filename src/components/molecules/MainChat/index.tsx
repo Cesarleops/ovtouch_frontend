@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { ChatFooter } from "../ChatFooter";
 import { ChatBody } from "../ChatBody";
+import { useSelector } from "react-redux";
 
 interface Messages {
   messages: Array<string>;
 }
+
 export const MainChat = ({ socket }) => {
   const [messages, setMessages] = useState<Messages["messages"]>([]);
 

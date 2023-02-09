@@ -4,10 +4,12 @@ export const chatSlice = createSlice({
   name: "chatSlice",
   initialState: {
     isChatting: false,
+    currentChat: undefined,
   },
   reducers: {
-    startChat: (state) => {
+    startChat: (state, { payload }) => {
       state.isChatting = true;
+      state.currentChat = payload;
     },
   },
 });
