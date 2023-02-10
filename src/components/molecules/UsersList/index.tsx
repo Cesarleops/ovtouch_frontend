@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { startChat } from "../../../store/chat";
+import { startChat } from "../../../redux/chat";
 import "./usersList.scss";
 
 export const UsersList = ({ socket }) => {

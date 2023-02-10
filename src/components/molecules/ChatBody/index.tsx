@@ -1,21 +1,42 @@
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../store/store";
+import type { RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
 import { ChatFooter } from "../ChatFooter";
 import axios from "axios";
 import "./chatBody.scss";
-export const ChatBody = ({ socket }) => {
-  const { currentChat } = useSelector((state: RootState) => state.chat);
+import { Socket } from 'socket.io-client';
+
+
+export interface messagesInterface {
+  sendedBy: string;
+  recievedBy: string;
+  message: string;
+} 
+
+export const ChatBody = ( socket: Socket) => {
+  const chat = useSelector((state: RootState) => state.chat);
+
   const user = useSelector((state: RootState) => state.auth);
-  const [messages, setMessages] = useState([]);
+  
+  const [messages, setMessages] = useState<messagesInterface[]>([
+    {
+      message:'',
+      recievedBy:'',
+      sendedBy:''
+    }
+  ]);  
+
   console.log(messages);
+  
   const [recievedMessage, setRecievedMessage] = useState(null);
+  
   console.log("el mensaje que llega", recievedMessage);
-  const handleNewMessage = async (message) => {
+  
+  const handleNewMessage = async (message:string) => {
     try {
       socket.emit("send-message", {
         sendedBy: user.uid,
-        recievedBy: currentChat.uid,
+        recievedBy: chat.currentChat.uid,
         message,
       });
       console.log("se envio");

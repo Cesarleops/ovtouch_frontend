@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./loginModal.scss";
 import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin } from "../../../store/auth/thunks";
+import { userLogin } from "../../../redux/auth/thunks";
 
 export const LoginModal = ({ onClose }) => {
   //   const { onClose } = props;
