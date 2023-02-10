@@ -26,12 +26,25 @@
             margin: 0;
         }
         &__body{
-            display: flex;
-            padding: 5px;
-            justify-content: flex-start;
-            background-color: green;
-            border-radius: 10px;
-            width: 200px;
+         
+            &__sended{
+                display: flex;
+                padding: 5px;
+                justify-content: flex-start;
+                background-color: green;
+                border-radius: 10px;
+                width: 200px;
+            }
+            &__recieved{
+                display: flex;
+                padding: 5px;
+                justify-content: flex-start;
+                background-color: blue;
+                border-radius: 10px;
+                width: 200px;
+            }
+            
+          
         }
     }
 

@@ -6,13 +6,13 @@ interface Message {
 }
 export const ChatFooter = ({ newMessage }) => {
   const [message, setMessage] = useState<Message["message"]>("");
-  console.log(message);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     newMessage(message);
+    console.log("se ejecuto");
     setMessage("");
   };
 

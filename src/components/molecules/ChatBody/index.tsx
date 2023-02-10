@@ -8,22 +8,26 @@ export const ChatBody = ({ socket }) => {
   const { currentChat } = useSelector((state: RootState) => state.chat);
   const user = useSelector((state: RootState) => state.auth);
   const [messages, setMessages] = useState([]);
+  console.log(messages);
   const [recievedMessage, setRecievedMessage] = useState(null);
+  console.log("el mensaje que llega", recievedMessage);
   const handleNewMessage = async (message) => {
-    console.log("el mensaje es", messages);
     try {
       socket.emit("send-message", {
         sendedBy: user.uid,
         recievedBy: currentChat.uid,
         message,
       });
+      console.log("se envio");
       await axios.post("http://localhost:3031/api/users/newmessage", {
         sendedBy: user.uid,
         recievedBy: currentChat.uid,
         text: message,
       });
-
-      setMessages([...messages, message]);
+      console.log("se guardo");
+      const newMessages = [...messages];
+      newMessages.push({ ownMessage: true, message });
+      setMessages(newMessages);
     } catch (error) {
       console.log("esto salio mal", error);
     }
@@ -50,11 +54,17 @@ export const ChatBody = ({ socket }) => {
 
   useEffect(() => {
     socket.on("message-recieved", (message) => {
-      setRecievedMessage(message);
-      recievedMessage &&
-        setMessages((prevState) => [...prevState, recievedMessage]);
+      console.log("llego un mensaje");
+      setRecievedMessage({ ownMessage: false, message });
+      console.log(recievedMessage);
     });
+  }, [messages, socket]);
+
+  useEffect(() => {
+    recievedMessage &&
+      setMessages((prevState) => [...prevState, recievedMessage]);
   }, [recievedMessage]);
+
   return (
     <section className="chatBody">
       <section>
@@ -63,10 +73,14 @@ export const ChatBody = ({ socket }) => {
         </section>
         <section className="chatBody--messages">
           {messages.map((m) => (
-            <div className="chatBody--messages__body">
-              <p key={m.sendedBy} className="chatBody--messages__body__text">
-                {m.text}
-              </p>
+            <div>
+              <div
+                className={`chatBody--messages__body__${
+                  m.ownMessage ? "sended" : "recieved"
+                }`}
+              >
+                <p className="chatBody--messages__body__text">{m.message}</p>
+              </div>
             </div>
           ))}
         </section>
