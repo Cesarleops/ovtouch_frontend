@@ -17,16 +17,19 @@ export const ChatFooter = (newMessage: (message: string) => Promise<void>) => {
   };
 
   return (
-    <div>
-      <form className="messageForm" onSubmit={handleSubmit}>
+    <div className="chatFooter">
+      <form className="chatFooter--messageForm" onSubmit={handleSubmit}>
         <input
           onChange={handleInputChange}
           value={message}
           type="text"
-          className="textInput"
+          className="chatFooter--messageForm__textInput"
         />
-        <div className="iconSection">
-          <IoSend type="submit" className="sendMessage" />
+        <div className="chatFooter--messageForm__iconSection">
+          <IoSend
+            type="submit"
+            className="chatFooter--messageForm__sendMessage"
+          />
         </div>
       </form>
     </div>

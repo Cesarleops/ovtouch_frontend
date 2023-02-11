@@ -50,9 +50,9 @@ export const Home = () => {
 
   return (
     <main className="mainBody">
-      <header>
+      {/* <header>
         <button onClick={handleClick}>Sign Out</button>
-      </header>
+      </header> */}
       <main className="mainBody--chat">
         <section className="mainBody--chat__list">
           <UsersList socket={socket} />

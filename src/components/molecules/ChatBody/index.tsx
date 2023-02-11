@@ -86,6 +86,10 @@ export const ChatBody = ( {socket}:any) => {
       setMessages((prevState) => [...prevState, recievedMessage]);
   }, [recievedMessage]);
 
+  // const ownMessages = messages.filter((item) => item.ownMessage);
+
+  // console.log('ownMessages', ownMessages);
+
   return (
     <section className="chatBody">
       <section>
@@ -94,14 +98,16 @@ export const ChatBody = ( {socket}:any) => {
         </section>
         <section className="chatBody--messages">
           {messages.map((m) => (
-            <div>
-              <div
+            <div className={`chatBody--messages__body__${
+                  m.ownMessage ? "sended" : "recieved"
+                }`}>
+                <p className="chatBody--messages__body__text">{m.message}</p>
+              {/* <div
                 className={`chatBody--messages__body__${
                   m.ownMessage ? "sended" : "recieved"
                 }`}
               >
-                <p className="chatBody--messages__body__text">{m.message}</p>
-              </div>
+              </div> */}
             </div>
           ))}
         </section>
