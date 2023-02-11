@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./loginModal.scss";
-import { BiArrowBack } from "react-icons/bi";
+// import { BiArrowBack } from "react-icons/bi";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../../redux/auth/thunks";
 
-export const LoginModal = ({ onClose }) => {
+export const LoginModal = ({ onClose }:any) => {
   //   const { onClose } = props;
 
   const dispatch = useDispatch();
@@ -13,14 +14,14 @@ export const LoginModal = ({ onClose }) => {
     password: "",
   });
 
-  const handleInputChange = ({ target }) => {
+  const handleInputChange = ({ target }:any) => {
     setInitialForm({
       ...initialForm,
       [target.name]: target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     dispatch(userLogin(initialForm));
   };
@@ -29,13 +30,20 @@ export const LoginModal = ({ onClose }) => {
     <div className="loginModal">
       <main className="loginModal--container">
         <header className="loginModal--container__header">
-          <BiArrowBack
+          <img
+            src="/images/chatpng.png"
+            alt="image-header"
+            className="loginModal--container__header__img"
+          />
+          
+          <AiFillCloseCircle
+            fill="white"
             onClick={onClose}
             className="loginModal--container__header__button"
           />
-          <h1 className="loginModal--container__header__title">Log In</h1>
         </header>
         <form className="loginModal--container__form" onSubmit={handleSubmit}>
+          {/* <h1 className="loginModal--container__header__title">Log In</h1> */}
           <label
             className="loginModal--container__form__nameLabel"
             htmlFor="username"

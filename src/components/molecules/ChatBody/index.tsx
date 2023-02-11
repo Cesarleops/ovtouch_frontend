@@ -13,8 +13,8 @@ export interface messagesInterface {
   message: string;
 } 
 
-export const ChatBody = ( socket: Socket) => {
-  const chat = useSelector((state: RootState) => state.chat);
+export const ChatBody = ( {socket}:any) => {
+  const {currentChat} = useSelector((state: RootState) => state.chat);
 
   const user = useSelector((state: RootState) => state.auth);
   
@@ -32,11 +32,11 @@ export const ChatBody = ( socket: Socket) => {
   
   console.log("el mensaje que llega", recievedMessage);
   
-  const handleNewMessage = async (message:string) => {
+  const handleNewMessage = async (message:any) => {
     try {
       socket.emit("send-message", {
         sendedBy: user.uid,
-        recievedBy: chat.currentChat.uid,
+        recievedBy: currentChat.uid!,
         message,
       });
       console.log("se envio");
