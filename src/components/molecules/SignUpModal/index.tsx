@@ -2,7 +2,7 @@ import React, { MouseEventHandler, useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import "./signUpModal.scss";
 import { useDispatch } from "react-redux";
-import { newUser } from "../../../store/auth/thunks";
+import { newUser } from "../../../redux/auth/thunks";
 // interface LoginModalProps {
 //   onClose: MouseEventHandler<SVGElement>;
 // }

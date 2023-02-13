@@ -1,50 +1,67 @@
+@import '../../../../variables.scss';
+
 .chatBody{
     display: flex;
     flex-direction: column;
     gap: 5px;
+    // border: 1px solid black;
+    width: 100%;
     &--title{
         display: flex;
         align-items: center;
-        width: 710px;
+        // width: 710px;
         padding-left: 10px;
-        background-color: green;
+        background-color: $primary-color;
         height: 40px;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
         &__text{
             margin: 0;
+            font-family:"Inter Tight", sans-serif;
+            color:white;
+            font-size: 25px;
+            letter-spacing: 2px;
         }
-       
     }
     &--messages{
-        background-color: white;
-        width: 700px;
-        height: 500px;
+        background: url('https://img.freepik.com/foto-gratis/muro-hormigon-blanco_53876-92803.jpg?w=740&t=st=1676153995~exp=1676154595~hmac=0e49bae114d5ac92a9eb120d8502cc02efcc7e441d030d3daf4f984cf94db1cf');
+        object-fit: contain;
+        // width: 700px;;
+        // margin:3px;
         display: flex;
         flex-direction: column;
+        overflow: scroll;
         gap: 3px;
         padding: 10px;
+        height: 77.7vh;
+        max-height:76.7vh;
         &__text{
             margin: 0;
         }
         &__body{
-         
             &__sended{
+                align-self: end;
                 display: flex;
                 padding: 5px;
                 justify-content: flex-start;
-                background-color: green;
+                background-color:$primary-color;
                 border-radius: 10px;
-                width: 200px;
+                color:white;
+                padding: 10px;
+                font-family:"Inter Tight", sans-serif;
+                width: fit-content;
             }
             &__recieved{
                 display: flex;
                 padding: 5px;
+                color: white;
                 justify-content: flex-start;
-                background-color: blue;
+                background-color: #6D12E0;
+                font-family:"Inter Tight", sans-serif;
                 border-radius: 10px;
-                width: 200px;
+                padding: 10px;
+                width: fit-content;
             }
-            
-          
         }
     }
 

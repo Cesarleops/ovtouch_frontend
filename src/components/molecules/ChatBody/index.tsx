@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../store/store";
+import type { RootState } from "../../../redux/store";
 import { useEffect, useState } from "react";
 import { ChatFooter } from "../ChatFooter";
 import axios from "axios";
@@ -62,6 +62,10 @@ export const ChatBody = ({ socket }) => {
   //     setMessages((prevState) => [...prevState, recievedMessage]);
   // }, [recievedMessage]);
 
+  // const ownMessages = messages.filter((item) => item.ownMessage);
+
+  // console.log('ownMessages', ownMessages);
+
   return (
     <section className="chatBody">
       <section>
@@ -76,8 +80,7 @@ export const ChatBody = ({ socket }) => {
                   m.ownMessage ? "sended" : "recieved"
                 }`}
               >
-                <p className="chatBody--messages__body__text">{m.message}</p>
-              </div>
+              </div> */}
             </div>
           ))}
         </section>

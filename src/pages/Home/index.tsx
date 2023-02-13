@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { io, Socket } from "socket.io-client";
 import type { RootState } from "../../store/store";
 import { onLogout, onVerification } from "../../store/auth/authSlice";
@@ -32,9 +31,9 @@ export const Home = () => {
   }, [user]);
   return (
     <main className="mainBody">
-      <header>
+      {/* <header>
         <button onClick={handleClick}>Sign Out</button>
-      </header>
+      </header> */}
       <main className="mainBody--chat">
         <section className="mainBody--chat__list">
           <UsersList socket={socket} />

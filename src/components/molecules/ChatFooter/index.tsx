@@ -4,7 +4,7 @@ import { IoSend } from "react-icons/io5";
 interface Message {
   message: string;
 }
-export const ChatFooter = ({ newMessage }) => {
+export const ChatFooter = (newMessage: (message: string) => Promise<void>) => {
   const [message, setMessage] = useState<Message["message"]>("");
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
@@ -17,16 +17,19 @@ export const ChatFooter = ({ newMessage }) => {
   };
 
   return (
-    <div>
-      <form className="messageForm" onSubmit={handleSubmit}>
+    <div className="chatFooter">
+      <form className="chatFooter--messageForm" onSubmit={handleSubmit}>
         <input
           onChange={handleInputChange}
           value={message}
           type="text"
-          className="textInput"
+          className="chatFooter--messageForm__textInput"
         />
-        <div className="iconSection">
-          <IoSend type="submit" className="sendMessage" />
+        <div className="chatFooter--messageForm__iconSection">
+          <IoSend
+            type="submit"
+            className="chatFooter--messageForm__sendMessage"
+          />
         </div>
       </form>
     </div>

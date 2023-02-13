@@ -3,7 +3,7 @@ import { LandingPage } from "../pages/LandingPage";
 
 import { useSelector } from "react-redux";
 import { Home } from "../pages/Home";
-import { RootState } from "../store/store";
+import { RootState } from "../redux/store";
 
 export const AppRouter = () => {
   const { status } = useSelector((state: RootState) => state.auth);
