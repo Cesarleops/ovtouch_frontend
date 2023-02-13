@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface chatInitialStateInterface {
+  users: {}
+  isChatting: boolean
+  currentChat:{} 
+}
+
 export const chatSlice = createSlice({
   name: "chatSlice",
   initialState: {

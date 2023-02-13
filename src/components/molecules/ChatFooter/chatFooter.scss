@@ -1,28 +1,40 @@
+@import '../../../../variables.scss';
 
-.messageForm{
+.chatFooter{
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 8vh;
+    &--messageForm{
+    width: 90%;
     display: flex;
     align-items: center;
     gap: 5px;
-}
-
-.textInput{
-    width: 400px;
-    border-radius: 10px;
-    border: 1px solid green;
-}
-
-.iconSection{
-    background-color: green;
-    border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6px;
-}
-
-.sendMessage{
-    color: white;
-    width: 20px;
-    height: 20px;
-
+        &__textInput{
+        width: 100%;
+        height: 30px;
+        border-radius: 40px;
+        border: none;
+        font-size: 20px;
+        padding: 0 10px;
+        font-family:"Inter Tight", sans-serif
+        }:focus-visible{
+        border: 1px solid gray;
+        outline: none;
+        }
+        &__iconSection{
+        background-color:$primary-color;
+        border-radius: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px;
+        }
+        &__sendMessage{
+            color: white;
+            width: 20px;
+            height: 20px;
+            }
+    }
 }

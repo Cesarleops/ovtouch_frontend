@@ -9,29 +9,37 @@
     height: 80vh;
     bottom: 0;
     left: 0;
+    flex-direction: column;
     border-radius: 36px 36px 0 0 ;
     &--container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         &__header{
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          margin-bottom: 60px;
-          gap: 80px;
-          color: $secondary-color;
-          &__button{
-            width: 30px;
+            &__img{
+                width: 300px;
+            }
+        &__button{
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 30px;
+            right: 30px;
             height: 30px;
-          }
-          
+        }
+        &__title{
+            color:white;
+            text-align: center;
+            margin-bottom:0px;
+        }
         }
         &__form{
             width: 250px;
-            height: 250px;
+            height: 200px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 2px;
             padding: 20px;
-
             &__nameLabel{
                 color: $secondary-color;
                 font-size: 20px;
@@ -39,30 +47,50 @@
             &__passwordLabel{
                 color: $secondary-color;
                 font-size: 20px;
+                margin-top: 15px;
             }
             
             &__inputUsername{
                 border: none;
-                border-bottom: 4px solid $secondary-color;
+                // border-bottom: 4px solid $secondary-color;
                 height: 25px;
                 border-radius: 5px;
+                padding: 0px 10px;
+                background-color: $primary-color;
+                border: 2px solid white;
+                color: white;
+                font-family:"Inter Tight", sans-serif
+            }:focus{
+                background-color: white;
+                outline: none;
+                color:black
             }
             &__inputPassword{
                 border: none;
                 height: 25px;
-                border-bottom: 4px solid $secondary-color;
+                background-color: $primary-color;
+                border: 2px solid white;
                 border-radius: 5px;
+                padding: 0px 10px;
+                color: white;
                 
+            }:focus{
+                color:black
             }
             &__buttonLogin{
                 border: none;
-                border-radius: 5px ;
-                width: 250px;
+                margin-top: auto;
+                border-radius: 20px ;
+                width: 100px;
+                align-self: center;
                 height: 35px;
                 background-color: $secondary-color;
                 font-weight: 600;
                 font-size: 15px;
                 color: $primary-color;
+                font-family:"Inter Tight", sans-serif
+            }:active{
+                color:$primary-color
             }
         }
 

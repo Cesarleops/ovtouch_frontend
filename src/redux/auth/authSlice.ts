@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { onLoginPayloadInterface } from '../interfaces/authSlice.interface';
 
 export const authSlice = createSlice({
     name: 'authSlice',
@@ -13,9 +14,10 @@ export const authSlice = createSlice({
     },
     reducers: {
          onLogin: (state, {payload}) => {
-            state.name = payload.user.name
+            const payloadT : onLoginPayloadInterface = payload
+            state.name = payloadT.user.name
             state.status = 'authenticated',
-            state.uid = payload.user.uid,
+            state.uid = payloadT.user.uid,
             localStorage.setItem('user', state.status)
             // state.email = payload.email
             // state.img = payload.img
