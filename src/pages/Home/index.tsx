@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { io, Socket } from "socket.io-client";
-import type { RootState } from "../../store/store";
-import { onLogout, onVerification } from "../../store/auth/authSlice";
+import type { RootState } from "../../redux/store";
+import { onLogout, onVerification } from "../../redux/auth/authSlice";
 import { useEffect, useRef } from "react";
 import "./home.scss";
 import { UsersList } from "../../components/molecules/UsersList";
 import { MainChat } from "../../components/molecules/MainChat";
-import { showUsers } from "../../store/chat";
+import { showUsers } from "../../redux/chat";
 import { connectedUsers, validateJWT } from "../../store/auth/thunks";
 
 const socket: Socket = io("http://localhost:3031");

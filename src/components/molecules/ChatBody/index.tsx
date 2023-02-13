@@ -79,8 +79,7 @@ export const ChatBody = ({ socket }) => {
                 className={`chatBody--messages__body__${
                   m.ownMessage ? "sended" : "recieved"
                 }`}
-              >
-              </div> */}
+              ></div>
             </div>
           ))}
         </section>
