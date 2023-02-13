@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GoogleSignIn } from "../../components/molecules/GoogleSignIn";
+
 import "./landingPage.scss";
 import { SignUpModal } from "../../components/molecules/SignUpModal";
 import { LoginModal } from "../../components/molecules/LoginModal";
@@ -36,7 +36,6 @@ export const LandingPage = () => {
             Log in
           </button>
           <p>Or continue with</p>
-          <GoogleSignIn />
         </div>
       </section>
 

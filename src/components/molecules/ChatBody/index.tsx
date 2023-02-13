@@ -8,26 +8,21 @@ export const ChatBody = ({ socket }) => {
   const { currentChat } = useSelector((state: RootState) => state.chat);
   const user = useSelector((state: RootState) => state.auth);
   const [messages, setMessages] = useState([]);
-  console.log(messages);
-  const [recievedMessage, setRecievedMessage] = useState(null);
-  console.log("el mensaje que llega", recievedMessage);
+
   const handleNewMessage = async (message) => {
     try {
-      socket.emit("send-message", {
-        sendedBy: user.uid,
-        recievedBy: currentChat.uid,
-        message,
-      });
-      console.log("se envio");
       await axios.post("http://localhost:3031/api/users/newmessage", {
         sendedBy: user.uid,
         recievedBy: currentChat.uid,
         text: message,
       });
-      console.log("se guardo");
-      const newMessages = [...messages];
-      newMessages.push({ ownMessage: true, message });
-      setMessages(newMessages);
+      socket.emit("send-message", {
+        sendedBy: user.uid,
+        recievedBy: currentChat.uid,
+        message,
+      });
+      setMessages([...messages, { ownMessage: true, message }]);
+      console.log("se agrego un mensaje");
     } catch (error) {
       console.log("esto salio mal", error);
     }
@@ -50,20 +45,22 @@ export const ChatBody = ({ socket }) => {
 
   useEffect(() => {
     getAllMessages();
+    console.log("se trajo los mensajes");
   }, [currentChat]);
 
   useEffect(() => {
-    socket.on("message-recieved", (message) => {
+    console.log("se ejecuta el segundo efecto");
+    socket.on("privado", (message) => {
       console.log("llego un mensaje");
-      setRecievedMessage({ ownMessage: false, message });
-      console.log(recievedMessage);
+      setMessages([...messages, { ownMessage: false, message }]);
     });
   }, [messages, socket]);
 
-  useEffect(() => {
-    recievedMessage &&
-      setMessages((prevState) => [...prevState, recievedMessage]);
-  }, [recievedMessage]);
+  // useEffect(() => {
+  //   console.log("se ejecuta el efecto del mensaje que llega");
+  //   recievedMessage &&
+  //     setMessages((prevState) => [...prevState, recievedMessage]);
+  // }, [recievedMessage]);
 
   return (
     <section className="chatBody">

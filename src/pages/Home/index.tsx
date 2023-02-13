@@ -3,51 +3,33 @@ import axios from "axios";
 import { io, Socket } from "socket.io-client";
 import type { RootState } from "../../store/store";
 import { onLogout, onVerification } from "../../store/auth/authSlice";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./home.scss";
 import { UsersList } from "../../components/molecules/UsersList";
 import { MainChat } from "../../components/molecules/MainChat";
 import { showUsers } from "../../store/chat";
+import { connectedUsers, validateJWT } from "../../store/auth/thunks";
 
 const socket: Socket = io("http://localhost:3031");
 
 export const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.auth);
-  const { isChatting, users } = useSelector((state: RootState) => state.chat);
-  const validateJWT = async () => {
-    const token = localStorage.getItem("token");
-    const response = await axios.get("http://localhost:3031/api/auth", {
-      headers: {
-        "x-token": token,
-      },
-    });
-
-    dispatch(onVerification(response.data.token));
-  };
-
-  const connectedUsers = async () => {
-    const { data } = await axios.get(
-      `http://localhost:3031/api/users/${user.uid}`
-    );
-
-    dispatch(showUsers(data));
-  };
-
+  const { isChatting } = useSelector((state: RootState) => state.chat);
   const handleClick = () => {
     dispatch(onLogout());
     localStorage.removeItem("token");
-    socket.disconnect();
   };
 
   useEffect(() => {
-    socket.connect();
-    socket.emit("loged-users", users);
     localStorage.setItem("token", user.token);
-    validateJWT();
-    connectedUsers();
+    //dispatch(validateJWT());
+    dispatch(connectedUsers(user));
   }, [user]);
 
+  useEffect(() => {
+    socket.emit("loged-users", user.uid);
+  }, [user]);
   return (
     <main className="mainBody">
       <header>

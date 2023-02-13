@@ -5,6 +5,8 @@ import "./usersList.scss";
 export const UsersList = ({ socket }) => {
   const { users } = useSelector((state) => state.chat);
   const dispatch = useDispatch();
+  console.log(users);
+
   const handleClick = (user) => {
     dispatch(startChat(user));
     socket.emit("start-chat", user.uid);
