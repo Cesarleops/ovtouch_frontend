@@ -4,12 +4,34 @@ import { useEffect, useState } from "react";
 import { ChatFooter } from "../ChatFooter";
 import axios from "axios";
 import "./chatBody.scss";
-export const ChatBody = ({ socket }) => {
-  const { currentChat } = useSelector((state: RootState) => state.chat);
-  const user = useSelector((state: RootState) => state.auth);
-  const [messages, setMessages] = useState([]);
+import { Socket } from "socket.io-client";
 
-  const handleNewMessage = async (message) => {
+export interface messagesInterface {
+  sendedBy: string;
+  recievedBy: string;
+  message: string;
+}
+
+export const ChatBody = ({ socket }: any) => {
+  const { currentChat } = useSelector((state: RootState) => state.chat);
+
+  const user = useSelector((state: RootState) => state.auth);
+
+  const [messages, setMessages] = useState<messagesInterface[]>([
+    {
+      message: "",
+      recievedBy: "",
+      sendedBy: "",
+    },
+  ]);
+
+  console.log(messages);
+
+  const [recievedMessage, setRecievedMessage] = useState(null);
+
+  console.log("el mensaje que llega", recievedMessage);
+
+  const handleNewMessage = async (message: any) => {
     try {
       await axios.post("http://localhost:3031/api/users/newmessage", {
         sendedBy: user.uid,
@@ -56,11 +78,10 @@ export const ChatBody = ({ socket }) => {
     });
   }, [messages, socket]);
 
-  // useEffect(() => {
-  //   console.log("se ejecuta el efecto del mensaje que llega");
-  //   recievedMessage &&
-  //     setMessages((prevState) => [...prevState, recievedMessage]);
-  // }, [recievedMessage]);
+  useEffect(() => {
+    recievedMessage &&
+      setMessages((prevState) => [...prevState, recievedMessage]);
+  }, [recievedMessage]);
 
   // const ownMessages = messages.filter((item) => item.ownMessage);
 
@@ -74,8 +95,13 @@ export const ChatBody = ({ socket }) => {
         </section>
         <section className="chatBody--messages">
           {messages.map((m) => (
-            <div>
-              <div
+            <div
+              className={`chatBody--messages__body__${
+                m.ownMessage ? "sended" : "recieved"
+              }`}
+            >
+              <p className="chatBody--messages__body__text">{m.message}</p>
+              {/* <div
                 className={`chatBody--messages__body__${
                   m.ownMessage ? "sended" : "recieved"
                 }`}
