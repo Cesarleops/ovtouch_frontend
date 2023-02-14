@@ -101,11 +101,6 @@ export const ChatBody = ({ socket }: any) => {
               }`}
             >
               <p className="chatBody--messages__body__text">{m.message}</p>
-              {/* <div
-                className={`chatBody--messages__body__${
-                  m.ownMessage ? "sended" : "recieved"
-                }`}
-              ></div>
             </div>
           ))}
         </section>
