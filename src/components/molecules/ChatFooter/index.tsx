@@ -4,7 +4,7 @@ import { IoSend } from "react-icons/io5";
 interface Message {
   message: string;
 }
-export const ChatFooter = (newMessage: (message: string) => Promise<void>) => {
+export const ChatFooter = ({ newMessage }) => {
   const [message, setMessage] = useState<Message["message"]>("");
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);

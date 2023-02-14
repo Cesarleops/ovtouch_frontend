@@ -74,7 +74,7 @@ export const ChatBody = ({ socket }: any) => {
     console.log("se ejecuta el segundo efecto");
     socket.on("privado", (message) => {
       console.log("llego un mensaje");
-      setMessages([...messages, { ownMessage: false, message }]);
+      setRecievedMessage({ ownMessage: false, message });
     });
   }, [messages, socket]);
 
