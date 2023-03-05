@@ -15,9 +15,9 @@ export const LandingPage = () => {
       {isLoginActive && <LoginTitle />}
       {isSignUpActive && <SignUpTitle />}
       <section className="landingPage--header">
-        <h1 className="landingPage--header__title">Sendy</h1>
+        <h1 className="landingPage--header__title">Hang up with friends</h1>
         <h3 className="landingPage--header__subtitle">
-          Connect with your friends!
+          meeting with your friends!
         </h3>
       </section>
 
